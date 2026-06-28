@@ -1,0 +1,28 @@
+name: Integracion Continua - Pruebas Jasmine
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  pruebas:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Clonar el repositorio
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Instalar dependencias
+        working-directory: ./parte1_framework
+        run: npm install
+
+      - name: Ejecutar pruebas Jasmine
+        working-directory: ./parte1_framework
+        run: npm test
